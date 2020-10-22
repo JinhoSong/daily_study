@@ -5,6 +5,7 @@
 * **Intellij + Spring Boot + Spring Security를 활용하여 프로젝트를 구성한다.**
 * **스프링 시큐리티 기본 API 및  Filter를 이해한다**
 	1. [Form Login 인증 필터 : UsernamePasswordAuthenicationFiliter](#Form-Login-인증-필터-:-UsernamePasswordAuthenicationFiliter)
+	2. [Logout 처리 LogoutFilter](#Logout-처리-LogoutFilter)
 
 ---
 
@@ -124,6 +125,4 @@
 
 		* **로그아웃은 POST로 전달되어야 한다**
 		* 해당 버튼 클릭시 로그아웃이 진행된다.
-
-		
 
