@@ -6,7 +6,7 @@
 
 ---
 
-1. ### Access Key와 secretKey 받기
+1. ### Access Key와 secret Key 받기
 
 	1. **key 생성하기**
 
