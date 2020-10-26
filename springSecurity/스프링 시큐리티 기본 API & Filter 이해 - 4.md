@@ -5,6 +5,10 @@
 * **Intellij + Spring Boot + Spring Security를 활용하여 프로젝트를 구성한다.**
 * **스프링 시큐리티 기본 API 및  Filter를 이해한다**
 
+	1. [동시 세션 제어, 세션 고정 보호, 세션 정책](#동시-세션-제어,-세션-고정-보호,-세션-정책)
+	2. [세션 제어 필터](#세션-제어-필터)
+	3. [권한 설정 및 표현식](#권한-설정-및-표현식)
+
 ---
 
 1. ### 동시 세션 제어, 세션 고정 보호, 세션 정책
@@ -143,4 +147,128 @@
     4. **필터링 과정 심화**
 
     	![image-20201022200636690](C:\Users\chosu\AppData\Roaming\Typora\typora-user-images\image-20201022200636690.png)
+    
+3. ### 권한 설정 및 표현식
+
+    * **권한 설정 방식**
+
+    	1. **선언적 방식**
+
+    		* URL : __http.antMatchers("/user/**").hasRole("USER")__
+
+    		* **Method**
+
+    			`@PreAuthorize("hasRole('USER')")`
+
+    			`public void user(){ System.out.println("user") }`
+
+    	2. **동적 방식 - DB 연동**
+
+    		* URL
+    		* Method
+
+    * **인가 설정 기본 코드**
+
+    	```java
+    	@Configuration
+    	@EnableWebSecurity
+    	public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    	
+    	    @Autowired
+    	    UserDetailsService userDetailsService;
+    	
+    	    @Override
+    	    protected void configure(HttpSecurity http) throws Exception {
+    	        http
+    	                .authorizeRequests()
+    	                .antMatchers("/user").hasRole("USER")
+    	                .antMatchers("/sys").hasRole("SYS")
+    	                .antMatchers("/admin").access("hasRole('ADMIN')or hasRole('SYS')")
+    	     
+    	    }
+    	}
+    	
+    	```
+
+    	* **구체적인 경로가 먼저오고 큰 범위는 나중에 오도록 한다 -> 뒤에 설명**
+
+    * **표현식**
+
+    	|        메소드         |                         동작                          |
+    	| :-------------------: | :---------------------------------------------------: |
+    	|    authenticated()    |           인증된 사용자의 접근을 허용한다.            |
+    	| fullyAuthenticated()  |   인증된 사용자의 접근을 허용, rememberMe 인증 제외   |
+    	|      permitAll()      |                  무조건 접근을 허용                   |
+    	|      anonymous()      |               익명사용자의 접근을 허용                |
+    	|    access(String)     | **주어진 SpEL 표현식의 평가 결과가 true면 접근 허용** |
+    	|    hasRole(String)    |           **사용자가 주어진 권한이 있다면**           |
+    	| hasAnyRole(String...) |       사용자가 주어진 권한이 있다면 접근을 허용       |
+
+    * **실습**
+
+    	```java
+    	 @Override
+    	    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    	
+    	        auth.inMemoryAuthentication().withUser("user").password("{noop}1111").roles("USER");
+    	        auth.inMemoryAuthentication().withUser("sys").password("{noop}1111").roles("SYS");
+    	        auth.inMemoryAuthentication().withUser("admin").password("{noop}1111").roles("ADMIN");
+    	        // 특성한 password 유형에 무엇을 사용했는지 명시해줘야한다. 검사할때 이를 보고 해석한다. {noop} 평문
+    	    }
+    	```
+
+    	* 먼저 `id,passoword,권한`을 가지고 있는 사용자들을 설정한다.
+
+    	```java
+    	@Override
+    	    protected void configure(HttpSecurity http) throws Exception {
+    	
+    	        http
+    	                .authorizeRequests()
+    	                .antMatchers("/user").hasRole("USER")
+    	                .antMatchers("/sys").hasRole("SYS")
+    	                .antMatchers("/admin/pay").hasRole("ADMIN")
+    	                .antMatchers("/admin/**").access("hasRole('ADMIN')or hasRole('SYS')")
+    	                .anyRequest().authenticated();
+    	    }
+    	}
+    	```
+
+    	1. **인가정책 규칙을 설정한다.**
+    	2. **정책은 프로그램이 위에서부터 아래로 읽으면서 수행한다.**
+    	3. **즉, 위에서 선언한 권한과 매핑이 성공할 경우 아래는 수행하지 않는다.**
+    	4. 따라서 큰 범위의 `admin/**`가 아래에 위치하고 작은 범위인 `admin/pay`가 위에 배치해야한다!!!!
+
+    * **실행결과**
+
+    	1. **USER권한 로그인**
+
+    		![image](https://user-images.githubusercontent.com/52272332/97138374-695cef00-179b-11eb-9435-85057f440bbd.png)
+
+    		* **USER**권한의 url에는 접근이 가능하지만
+
+    		![image](https://user-images.githubusercontent.com/52272332/97138413-7da0ec00-179b-11eb-982a-449a4023c6e8.png)
+
+    		* **ADMIN** 권한의 URL에는 접근이 불가능하다.
+
+    	2. **ADMIN권한 로그인**
+
+    		![image](https://user-images.githubusercontent.com/52272332/97138450-96a99d00-179b-11eb-8512-16b59855309e.png)
+
+    		* **ADMIN** 권한의 로그인이 가능하지만 반대로
+
+    		![image](https://user-images.githubusercontent.com/52272332/97138518-bc36a680-179b-11eb-9838-8a0cce755814.png)
+
+    		* **USER** 권한에 접근하지 못하게 된다.
+
+    	3. **여러 권한 부여하기**
+
+    		```java
+    		auth.inMemoryAuthentication().withUser("admin").password("{noop}1111").roles("ADMIN","SYS","USER");
+    		
+    		```
+
+    		* **여러 권한을 부여하기 위해 roles()로 처리하였다.**
+    		* 하드코딩 형태가 아닌 방법은 추후에 더 학습할 예정
+    		* `{noop}`은 비밀번호가 평문으로 들어갔다는 정보를 알려주는 것이다. **시큐리티 5버전 이상부터는 사용해야한다**
 
