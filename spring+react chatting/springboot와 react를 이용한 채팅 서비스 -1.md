@@ -186,15 +186,15 @@
         
         @PostConstruct
         private void init() {
-        chatRooms = new LinkedHashMap<>();
+            chatRooms = new LinkedHashMap<>();
         }
         
         public List<ChatRoom> findAllRoom() {
-        return new ArrayList<>(chatRooms.values());
+        	return new ArrayList<>(chatRooms.values());
         }
         
         public ChatRoom findRoomById(String roomId) {
-        return chatRooms.get(roomId);
+        	return chatRooms.get(roomId);
         }
         
         public ChatRoom createRoom(String name) {
@@ -225,9 +225,9 @@
         
         public void enterRoom(WebSocketSession session, ChatMessage chatMessage,ChatRoom chatRoom){
         // ENTER의 경우
-        chatRoom.getSessions().add(session); // 채팅에 참가한 모든 세션을 가져온다.
-        chatMessage.setMessage(chatMessage.getSender() + "님이 입장했습니다."); // 메시지를 새로 세팅하고
-        this.sendMessageAllClient(chatMessage,chatRoom); // 보낸다.
+            chatRoom.getSessions().add(session); // 채팅에 참가한 모든 세션을 가져온다.
+            chatMessage.setMessage(chatMessage.getSender() + "님이 입장했습니다."); // 메시지를 새로 세팅하고
+            this.sendMessageAllClient(chatMessage,chatRoom); // 보낸다.
         // 입장했습니다 표시를 보낸다.
         }
         
