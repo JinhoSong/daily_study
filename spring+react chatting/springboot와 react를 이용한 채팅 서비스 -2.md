@@ -438,13 +438,21 @@
       	</body>
       	</html>
     ```
-    
-    
 
 
-  	* **채팅방 입장시 `sw-stomp`로 서버 연결을 한다.**
-  	* **구독하는 액션을 수행한다.**
-  	* **`ws.subscribe("/sub/chat/room/" + vm.$data.roomId, function(message){ Method()})`**
-  	* 구독은 `/sub/chat/room/채팅방 번호`로 구독하고 이 주소를 `topic`으로 이용하여 서버에 메시지를 발행, 수신한다.
-  	* **메시지를 발행`pub`을 하는데 이것을 구독자들은 `ws.subscribe`에서 대기하고 있다가 발송된 메시지를 받아서 처리**
+* **채팅방 입장시 `sw-stomp`로 서버 연결을 한다.**
+
+* **구독하는 액션을 수행한다.**
+
+* **`ws.subscribe("/sub/chat/room/" + vm.$data.roomId, function(message){ Method()})`**
+
+* 구독은 `/sub/chat/room/채팅방 번호`로 구독하고 이 주소를 `topic`으로 이용하여 서버에 메시지를 발행, 수신한다.
+
+* **메시지를 발행`pub`을 하는데 이것을 구독자들은 `ws.subscribe`에서 대기하고 있다가 발송된 메시지를 받아서 처리**
+
+* **화면**
+
+	
+
+
 
