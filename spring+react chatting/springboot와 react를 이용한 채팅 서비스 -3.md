@@ -2,9 +2,9 @@
 
 ---
 
-1. [Create React App]
-2. [React 내부에서 로그인]
-3. [Socket 연결]
+1. [Create React App](#Create-React-App)
+2. [React 내부에서 로그인](#React-내부에서-로그인)
+3. [Socket 연결](#Socket-연결)
 
 ---
 
@@ -336,4 +336,9 @@
 				후
 
 				<img src="https://user-images.githubusercontent.com/52272332/102968240-dcce7300-4536-11eb-8968-1ad28e384dff.png" alt="image" style="zoom:50%;" />
+
+	3. ### 채팅방 서버 생성
+
+		1. **Spring boot project 생성**
+			* 
 
