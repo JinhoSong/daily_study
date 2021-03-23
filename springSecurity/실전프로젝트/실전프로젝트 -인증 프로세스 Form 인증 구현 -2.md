@@ -3,7 +3,7 @@
 ---
 
 1. [DB 연동 인증 처리 (1) : CustomUserDetailsService](#DB-연동-인증-처리-(1)-:-CustomUserDetailsService)
-2. ssss
+2. [DB 연동 인증 처리 (2) : CustomAuthenticationProvider](#DB-연동-인증-처리-(2)-:-CustomAuthenticationProvider)
 3. [UserDetailsService vs AuthenticationProvider](#UserDetailsService-vs-AuthenticationProvider)
 
 ---
@@ -158,4 +158,3 @@
 		    }
 		}
 		```
-
