@@ -110,13 +110,11 @@
 		                    }
 		                })
 		                .deleteCookies("remember-me"); // 서버에서 만든 쿠키를 삭제하고 싶으면 해당 이름을 넣으면 된다.
-		
-		
 		    }
 		}
 		
 		```
-
+		
 	* `LogoutForm`
 
 		* [http://localhost:8080/logout](#http://localhost:8080/logout)
@@ -124,5 +122,5 @@
 		![image](https://user-images.githubusercontent.com/52272332/96566377-75aafd00-1300-11eb-87ab-324472980142.png)
 
 		* **로그아웃은 POST로 전달되어야 한다**
-		* 해당 버튼 클릭시 로그아웃이 진행된다.
+	* 해당 버튼 클릭시 로그아웃이 진행된다.
 

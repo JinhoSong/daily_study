@@ -2,8 +2,8 @@
 
 ---
 
-1. [실전 프로젝트 생성]
-2. [정적 자원 관리 - WebIgnore 설정]
+1. [실전 프로젝트 생성](#실전-프로젝트-생성)
+2. [정적 자원 관리 - WebIgnore 설정](#정적-자원-관리---WebIgnore-설정)
 
 ---
 
@@ -365,3 +365,7 @@
 		* **디비 저장 확인**
 
 			![image](https://user-images.githubusercontent.com/52272332/111260063-81a6ab00-8663-11eb-8ef1-b187b7ca8b41.png)
+
+---
+
+출처 : [스프링 시큐리티 - Spring Boot 기반으로 개발하는 Spring Security](https://www.inflearn.com/course/코어-스프링-시큐리티)

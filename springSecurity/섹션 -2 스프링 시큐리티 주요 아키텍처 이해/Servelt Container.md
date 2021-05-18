@@ -10,12 +10,14 @@
   	* 요청 단위당 Thread로 동작한다.
   	* `HttpServlet`이 핵심 클래스이다.
   	* **장점**
-  		1. 빠르다
-  		2. 플랫폼이 독립적이다
-  		3. 보안, 이식성, 유지보수, 기능 확장이 용이하다.
+
+        1. 빠르다
+        2. 플랫폼이 독립적이다
+        3. 보안, 이식성, 유지보수, 기능 확장이 용이하다.
   	* **단점**
-  		1. 화면에 표현할 HTML을 작성해야한다.
-  		2. **반드시 컴파일 된 후에 작동한다**
+        1. 화면에 표현할 HTML을 작성해야한다.
+
+        2. **반드시 컴파일 된 후에 작동한다**
 
 2. **Static Pages vs Dynamic Pages**
 
@@ -106,10 +108,8 @@
 
 		![image](https://user-images.githubusercontent.com/52272332/97538406-ab886980-1a03-11eb-8fda-e9ef8b2fbd16.png)
 
-6. **References**
+8. **References**
 
-	* Java Servlets Tutorial
+  * Java Servlets Tutorial
 
-		http://www.tutorialspoint.com/servlets/servlets_tutorial.pdf, 2015
-
-7. 
+  	http://www.tutorialspoint.com/servlets/servlets_tutorial.pdf, 2015
